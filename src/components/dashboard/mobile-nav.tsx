@@ -12,7 +12,7 @@ import DashboardNav from "./nav"
 export default function MobileNav(){
     return(
         <Sheet>
-  <SheetTrigger>
+  <SheetTrigger asChild>
     <Button variant={"ghost"} className="mr-2 px-0 text-base hover:bg-transparent md:hidden">
         <Menu className="h-6 w-6" />
         <span className="sr-only">メニューを開く</span>

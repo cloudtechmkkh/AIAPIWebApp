@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "SubscriptionStatus" AS ENUM ('FREE', 'BASIC', 'PRO');
+CREATE TYPE "SubscriptionStatus" AS ENUM ('FREE', 'STARTER', 'PRO', 'ENTERPRISE');
 
 -- CreateTable
 CREATE TABLE "User" (

@@ -1,8 +1,8 @@
 import AuthButton from "@/components/auth/auth-button";
-import CreditDisplay from "@/components/dashboard/credit-display";
 import MobileNav from "@/components/dashboard/mobile-nav";
 import DashboardNav from "@/components/dashboard/nav";
 import Link from "next/link";
+import { Toaster } from "sonner";
 
 export default function RootLayout({
   children,
@@ -22,17 +22,15 @@ export default function RootLayout({
             </div>
             </div>
         </header>
-        <div className="container md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10">
+        <div className="md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10">
         <aside className="border-r hidden md:block h-[calc(100vh-4.1rem)]">
             <div>
                 <DashboardNav />
             </div>
-            <div>
-              <CreditDisplay/>
-            </div>
         </aside>
         <main className="flex w-full flex-col overflow-hidden p-4">{children}</main>
         </div>
+        <Toaster/>
     </div>
   );
 }

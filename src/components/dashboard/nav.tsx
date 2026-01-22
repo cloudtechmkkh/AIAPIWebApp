@@ -1,29 +1,25 @@
-'use client'
-import { navItems } from "@/config/nav";
+import { currentUser } from "@clerk/nextjs/server";
+import CreditDisplay from "./credit-display";
+import Items from "./items";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
 
-export default function DashboardNav() {
+export default async function DashboardNav() {
 
-    const pathname = usePathname()
+    const user = await currentUser()
 
-  return (
-    <nav className="grid gap-2 items-start">
-        {navItems.map(item => (
-            <Button
-            key={item.href}
-            variant={pathname === item.href ? 'secondary' : 'ghost'}
-            className={cn('justify-start', pathname === item.href && 'bg-accent')}
-            asChild
-            >
-                <Link href={item.href}>
-                {item.icon && <item.icon className="w-4 h-4 mr-2" />}
-                {item.title}
-                </Link>
-            </Button>
-        ))}
-    </nav>
-  )
+    return (
+        <nav className="grid gap-2 items-start">
+            <Items />
+
+            <div>
+                <CreditDisplay />
+                {user && (
+                    <Button asChild variant={'goocolor'}>
+                        <Link href={'/dashboard/plan'} className="w-full text-white font-bold mt-3">アップグレード</Link>
+                    </Button>
+                )}
+            </div>
+        </nav>
+    )
 }

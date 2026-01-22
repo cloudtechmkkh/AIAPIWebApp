@@ -41,6 +41,7 @@ model Subscription {
 
 enum SubscriptionStatus {
   FREE
-  BASIC
+  STARTER
   PRO
+  ENTERPRISE
 }

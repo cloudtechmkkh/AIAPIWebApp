@@ -67,6 +67,7 @@ export async function createStripeSession
 
     // Create Checkout Sessions from body params.
     const session = await stripe.checkout.sessions.create({
+      customer: customerId,
       line_items: [
         {
           // Provide the exact Price ID (for example, price_1234) of the product you want to sell

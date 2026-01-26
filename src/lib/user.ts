@@ -34,7 +34,16 @@ export async function deleteUser(clerkId:string){
         return null
     }
 
-    return await prisma.user.deleteMany({
-        where: {clerkId: clerkId}
+    return await prisma.$transaction(async (tx) => {
+        await tx.subscription.deleteMany({
+            where: {
+                user: {
+                    clerkId: clerkId
+                }
+            }
+        })
+        await tx.user.delete({
+            where: {clerkId: clerkId}
+        })
     })
 }

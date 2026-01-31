@@ -14,7 +14,7 @@ export default async function SettingPage() {
     const dbUser = await prisma.user.findUnique({
         where: { clerkId: user.id },
         include: {
-            subscriptions: true
+            Subscription: true
         }
     })
 
@@ -31,7 +31,7 @@ export default async function SettingPage() {
                 <ProfileSection
                     email={user.emailAddresses[0].emailAddress}
                     subscriptionStatus={dbUser.subscriptionStatus}
-                    nextBillingDate={dbUser.subscriptions?.stripeCurrentPeriodEnd}
+                    nextBillingDate={dbUser.Subscription?.stripeCurrentPeriodEnd}
                 />
             </div>
             <div>

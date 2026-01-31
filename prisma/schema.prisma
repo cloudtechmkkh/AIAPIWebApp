@@ -9,27 +9,27 @@ datasource db {
 }
 
 model Subscription {
-  id                     String   @id
+  id                     String   @id @default(uuid())
   userId                 String   @unique
   stripeSubscriptionId   String   @unique
   stripePriceId          String
   stripeCurrentPeriodEnd DateTime
   createdAt              DateTime @default(now())
-  updatedAt              DateTime
+  updatedAt              DateTime @updatedAt
   User                   User     @relation(fields: [userId], references: [id])
 
   @@index([userId])
 }
 
 model User {
-  id                 String             @id
+  id                 String             @id @default(uuid())
   clerkId            String             @unique
   email              String             @unique
   stripeCustomerId   String?            @unique
   credits            Int                @default(5)
   subscriptionStatus SubscriptionStatus @default(FREE)
   createdAt          DateTime           @default(now())
-  updatedAt          DateTime
+  updatedAt          DateTime           @updatedAt
   Subscription       Subscription?
 }
 

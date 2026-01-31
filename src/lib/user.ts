@@ -37,7 +37,7 @@ export async function deleteUser(clerkId:string){
     return await prisma.$transaction(async (tx) => {
         await tx.subscription.deleteMany({
             where: {
-                user: {
+                User: {
                     clerkId: clerkId
                 }
             }

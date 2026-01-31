@@ -39,7 +39,7 @@ export async function handleSubscriptionCreated(subscription: Stripe.Subscriptio
                 credits: {
                     increment: credits
                 },
-                subscriptions: {
+                Subscription: {
                     create: {
                         stripeSubscriptionId: subscription.id,
                         stripePriceId: priceId,
@@ -71,7 +71,7 @@ export async function handleSubscriptionUpdated(subscription: Stripe.Subscriptio
                 credits: {
                     increment: effectiveCredits
                 },
-                subscriptions: {
+                Subscription: {
                     create: {
                         stripeSubscriptionId: subscription.id,
                         stripePriceId: priceId,

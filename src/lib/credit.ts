@@ -1,3 +1,4 @@
+'server'
 import { currentUser } from "@clerk/nextjs/server"
 import { prisma } from "./prisma"
 
@@ -6,7 +7,7 @@ export async function getUserCredit(){
        const user = await currentUser()
 
        if(!user){
-        return 0
+        return null
        }
 
        const dbUser = await prisma.user.findUnique({

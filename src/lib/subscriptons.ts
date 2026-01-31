@@ -2,7 +2,7 @@
 import { STRIPE_PRANS } from "@/config/plan";
 import Stripe from "stripe";
 import { prisma } from "./prisma";
-import { SubscriptionStatus } from "@/generated/prisma/enums";
+import { SubscriptionStatus } from "@prisma/client";
 
 
 function getPlanDetails(subscription: Stripe.Subscription) {

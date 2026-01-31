@@ -2,6 +2,9 @@ import { createUser, deleteUser, updateUser } from '@/lib/user'
 import { verifyWebhook } from '@clerk/nextjs/webhooks'
 import { NextRequest, NextResponse } from 'next/server'
 
+export const runtime = "nodejs"
+export const preferredRegion = "home"
+
 export async function POST(req: NextRequest) {
     let evt
     try{

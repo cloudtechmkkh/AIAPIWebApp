@@ -3,12 +3,12 @@
 面接用の説明資料として、プロジェクトの目的・構成・技術スタックが一目でわかるように整理したREADMEです。  
 Next.js App Routerで構築したAI SaaSのデモアプリで、認証・サブスク課金・クレジット管理・画像系AI機能を一通り実装しています。
 
-## 概要
+## 概要 🧭
 - 画像生成と背景除去を行うAIツールを、SaaSとして提供する想定のデモ実装
 - Clerkによる認証、Stripeによるサブスク決済、Prismaによるユーザー/契約管理
 - クレジット制での利用制御を前提にしたUI/フローを実装
 
-## 主な機能
+## 主な機能 ✨
 - サインアップ/ログイン（Clerk）
 - ダッシュボード・プラン選択・設定画面
 - 画像生成（Stability AI API）
@@ -16,7 +16,7 @@ Next.js App Routerで構築したAI SaaSのデモアプリで、認証・サブ�
 - Stripe Checkout + Webhookでのサブスク管理
 - クレジット表示・プラン別の利用設計
 
-## 技術スタック
+## 技術スタック 🧰
 - フロント/バックエンド: Next.js 16 (App Router), React 18, TypeScript
 - UI: Tailwind CSS, Radix UI (shadcn/ui)
 - 認証: Clerk
@@ -26,7 +26,7 @@ Next.js App Routerで構築したAI SaaSのデモアプリで、認証・サブ�
 - フォーム/バリデーション: React Hook Form, Zod
 - 外部AI: Stability AI API
 
-## 主要ルート
+## 主要ルート 🧭
 - `/` ランディング
 - `/sign-in` `/sign-up` 認証
 - `/dashboard` ダッシュボード
@@ -37,7 +37,7 @@ Next.js App Routerで構築したAI SaaSのデモアプリで、認証・サブ�
 - `/api/remove-background` 背景削除API
 - `/api/webhook/stripe` Stripe Webhook
 
-## ディレクトリ構成
+## ディレクトリ構成 🗂️
 - `src/app` ルーティング（App Router）
 - `src/components` UI/画面コンポーネント
 - `src/actions` Server Actions（AI実行・Stripeセッション作成）
@@ -45,7 +45,7 @@ Next.js App Routerで構築したAI SaaSのデモアプリで、認証・サブ�
 - `prisma` スキーマ・マイグレーション
 - `src/config` ナビ/プラン定義（Stripe Price ID含む）
 
-## セットアップ
+## セットアップ 🚀
 ```bash
 npm install
 npm run dev
@@ -56,7 +56,7 @@ DB準備（初回のみ）:
 npx prisma migrate dev
 ```
 
-## 環境変数
+## 環境変数 🔐
 `.env` に以下を設定してください。
 ```bash
 DATABASE_URL=postgresql://USER:PASSWORD@HOST:PORT/DB
@@ -71,12 +71,24 @@ STRIPE_WEBHOOK_SECRET=whsec_xxx
 STABILITY_API_KEY=sk_xxx
 ```
 
-## 補足（面接向けポイント）
+## 何をしているアプリか（要点） 🧩
+- AI画像の「生成」と「背景除去」をSaaSとして提供するデモ
+- 認証→プラン選択→課金→ツール利用、という一連の体験を実装
+- クレジット制で利用量をコントロールする設計
+
+## 処理フロー（ざっくり） 🔄
+1. ユーザーがClerkでログイン
+2. Stripe Checkoutでプラン購入
+3. Webhookでサブスク状態をDBへ同期
+4. ダッシュボードでツールを利用
+5. AI APIにリクエストし、画像を最適化して返却
+
+## 補足（面接向けポイント） 📝
 - `User` と `Subscription` をPrismaで管理し、Stripe Webhookで同期
 - Stripe Price IDは `src/config/plan.ts` で定義
 - AI系APIの結果は `sharp` で最適化して返却
 
-## スクリプト
+## スクリプト 📜
 - `npm run dev` 開発サーバ起動
 - `npm run build` 本番ビルド
 - `npm run start` 本番起動

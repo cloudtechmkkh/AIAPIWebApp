@@ -21,3 +21,21 @@ export async function getUserCredit(){
         return 0
     }
 }
+
+export async function decrementUserCredits(clerkId: string) {
+    try {
+        const user = await prisma.user.update({
+            where: {clerkId},
+            data: {
+                credits: {
+                    decrement: 1
+                }
+            }
+        });
+
+        return user?.credits ?? 0
+    } catch (error) {
+        console.error('Error decrementing user credits:', error)
+        throw new Error('Failed to decrement user credits')
+    }
+}

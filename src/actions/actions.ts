@@ -1,5 +1,10 @@
 'use server'
 
+import { decrementUserCredits, getUserCredit } from "@/lib/credit"
+import { currentUser } from "@clerk/nextjs/server"
+import { revalidatePath } from "next/cache"
+import { redirect } from "next/navigation"
+
 export type GenerateImageState = {
     imageUrl?: string
     error?: string
@@ -18,6 +23,18 @@ export async function GenerateImage(
     prevState: GenerateImageState,
     formData: FormData
 ): Promise<GenerateImageState> {
+
+    const user = await currentUser()
+
+    if(!user) {
+        throw new Error("ユーザーが認証されていません")
+    }
+
+    const credits = await getUserCredit()
+    if( credits == null || credits < 0 ) {
+        redirect('/dashboard/plan?reason=insufficient_credits')
+    }
+
     const keyword = formData.get("keyword")
 
     if (!keyword || typeof keyword !== 'string') {
@@ -39,6 +56,9 @@ export async function GenerateImage(
         )
 
         const data = await response.json()
+
+        await decrementUserCredits(user.id)
+        revalidatePath('/dashboard')
 
         return {
             status: 'success',

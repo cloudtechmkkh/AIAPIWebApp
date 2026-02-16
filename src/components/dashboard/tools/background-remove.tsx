@@ -57,7 +57,7 @@ export default function BackgroundRemove() {
         <div className="space-y-3">
             <form action={formAction} className="space-y-4 max-w-xl">
             <div>
-                <Label htmlFor="image">ファイルをアップロード</Label>
+                <Label htmlFor="image" className="mb-3">ファイルをアップロード</Label>
                 <Input 
                 id="image"
                 name="image"
